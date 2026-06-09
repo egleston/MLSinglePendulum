@@ -4,12 +4,11 @@
 class Pendulum {
   enum Phase {
         STANDBY = 0,
-        KICK = 1,
-        SWINGUP = 2,
-        BALANCEUP = 3,
-        BALANCEDOWN = 4,
-        LOOPINGCW = 5,
-        LOOPINGCCW = 6
+        SWINGUP = 1,
+        BALANCEUP = 2,
+        BALANCEDOWN = 3,
+        LOOPINGCW = 4,
+        LOOPINGCCW = 5
       };
   private:
     float angleRatio = 1.0f; // Conversion factor from encoder steps to radians
@@ -54,7 +53,6 @@ class Pendulum {
     uint8_t phaseCounter = 0; // Counter for the number of swings during swing up phase
     void updateRatios();
     void standby();
-    void kick();
     void swingUp();
     void balanceUp();
     void balanceDown();

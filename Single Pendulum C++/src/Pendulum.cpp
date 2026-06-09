@@ -100,7 +100,6 @@ void Pendulum::action() {
   }
   switch (phase) {
     case STANDBY: standby(); break;
-    case KICK: kick(); break;
     case SWINGUP: swingUp(); break;
     case BALANCEUP: balanceUp(); break;
     case BALANCEDOWN: balanceDown(); break;
@@ -115,26 +114,6 @@ void Pendulum::standby() {
   tmc.targetPosition(0); //Set target position to zero
 }
 
-void Pendulum::kick() { //Apply first oscillating acceleration to swing up the pendulum
-  if (millis() - lastPhaseChangeTime > 50 && abs(position - (lastPosition + kickMagnitude)) < 0.005f) {phase = SWINGUP; return;}
-  //if (millis() - lastPhaseChangeTime > 100 && sin(angle)<0.0f) {phase = SWINGUP; return;}
-  if (cos(angle) < cos(threshold)) { phase = BALANCEUP; return;}
-  tmc.setRampMode(0); //Set to position mode
-  tmc.setAcceleration(kickAcceleration * accelerationRatio); //Set acceleration for the kick
-  tmc.setSpeed(vMax * speedRatio); //Set speed to maximum
-  tmc.targetPosition((lastPosition + kickMagnitude)/distanceRatio); //Set target position for the kick
-}
-
-/*
-void Pendulum::swingUp() {
-  if (cos(angle) < -cos(threshold)) { phase = BALANCEUP; return;} //Transition to balance phase when angle exceeds threshold
-  float e = getEnergyBalance();
-  float signAngle = cos(angle) > 0.0f ? 1.0f : -1.0f; //Sign of the angle for energy shaping
-  float signVelocity = angularVelocity < 0.0f ? 1.0f : -1.0f; //Sign of the velocity for energy shaping
-  float a = ea * e * signAngle*signVelocity;// * signVelocity - ex * position - exd * velocity;
-  setAcceleration(a);
-}
-*/
 void Pendulum::swingUp() {
   if (cos(angle) < cos(sw[6])) { phase = BALANCEUP; return;} //Transition to balance phase when angle exceeds threshold
   //if (phaseCounter == 0 && abs(position - sw[0]) < 0.001f) {phaseCounter = 1; return;} //Transition to next phase of swing up controller when position reaches first threshold

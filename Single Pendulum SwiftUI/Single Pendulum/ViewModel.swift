@@ -44,7 +44,7 @@ import MLUnit
       .init("Encoder Speed", 0x01, double: 0, unit: .rad_s),
       .init("Motor Position [mm]", 0x02, double: 0, unit: .mm),
       .init("Motor Speed", 0x03, double: 0, unit: .mm),
-      .init("Cycle Time", 0x04, double: 0, unit: .s)
+      .init("Cycle Time", 0x04, double: 0, unit: .ms)
       //.init("Custom 1", 0x04, double: 0),
       //.init("Custom 2", 0x06, double: 0)
     ]
@@ -68,7 +68,7 @@ import MLUnit
     print("port is closed")
   }
   func reset() {
-   
+    data = .init()
   }
   func serialPort(_ serialPort: ORSSerialPort, didReceive data: Data) {
     guard data.count == 25 else {
@@ -235,7 +235,6 @@ import MLUnit
 
 enum Phase: String, CaseIterable {
   case stop = "Stop"
-  case kick = "Kick"
   case swingUp = "Swing Up"
   case balanceUp = "Balance Up"
   case balanceDown = "Balance Down"

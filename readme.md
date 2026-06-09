@@ -7,3 +7,5 @@ This repository contains all the files needed to build a simple pendulum.
 - **Single Pendulum Circuit**: Folder containing the pcb (schematic + footprint) drawn on Kicad, this circuit allows to connect electrically all the parts together (motor, controller, etc.)
 - **Single Pendulum C++**: Folder containing the source code of the controller, written in C++, in VSCode PlatformIO
 - **Single Pendulum SwiftUI**: Folder containing the source code of the program on the computer to set-up the system, to set the parameters and to launch the machine, written in SwiftUI, for MacOS computer
+- **Single Pendulum Python**: Folder containing the source code written in Python, only the basics intended to control the pendulum from the computer
+- **Single Pendulum Drawings pdf**: Folder containing some assembly drawings and some machined part drawings
